@@ -15,12 +15,13 @@ if [ -z $uid ]; then
     gid=10001
 fi
 
-if [ ! $# = 1 ]; then
-  echo "Usage: $0 user@domain"
+if [ ! $# = 2 ]; then
+  echo "Usage: $0 user@domain password"
   exit 1
 else
   user=`echo "$1" | cut -f1 -d "@"`
   domain=`echo "$1" | cut -s -f2 -d "@"`
+  password=$2
   if [ -x $domain ]
    then
     echo "No domain given\nUsage: $0 user@domain"
@@ -60,7 +61,7 @@ else
 
   # add password to dovecot
   echo "Adding imap password to dovecot"
-  passwd=`doveadm pw -u $user`
+  passwd=`doveadm pw -p $password`
   echo  "$user@$domain:$passwd" >> /secure/dovecot/passwd
 fi
 

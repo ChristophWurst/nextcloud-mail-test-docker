@@ -1,5 +1,6 @@
 FROM centos:7
 MAINTAINER Robin Dietrich <me@invokr.org>
+MAINTAINER Christoph Wurst <christoph@winzerhof-wurst.at>
 
 # Install postfix, dovecot, and supervisor
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
