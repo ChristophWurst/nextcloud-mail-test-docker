@@ -1,6 +1,4 @@
 FROM centos:7
-MAINTAINER Robin Dietrich <me@invokr.org>
-MAINTAINER Christoph Wurst <christoph@winzerhof-wurst.at>
 
 # Install postfix, dovecot, and supervisor
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
@@ -46,6 +44,8 @@ ADD config/dovecot /etc/dovecot
 EXPOSE 25
 EXPOSE 587
 EXPOSE 993
+
+RUN /opt/bin/useradd user@domain.tld mypassword
 
 # Start our init system
 CMD ["/opt/bin/dumb-init", "/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
